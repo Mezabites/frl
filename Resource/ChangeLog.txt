@@ -1,0 +1,14 @@
+//Rebuid project after editing this file! 
+
+//format: Author [tags] text
+//# - will be replaced with redmine hyperlink
+//[WEB] - Changes are displayed in web aplication (/Home/Changelog)
+//[DB] - Indicates that this change requires sql script - this will enable script control logic
+
+//[DEBUG] - Changes are displayed only if debugger is attached to code
+//[TEAM] - Changes are displayed only if conection string indecates local Codex envirement OR if debugger is attached to code
+//[CLIENT] - Changes are displayed for everyone
+
+
+v0.1 2023.07.09
+- Edgars [WEB CLIENT] Initial relese
