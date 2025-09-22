@@ -1,0 +1,2 @@
+﻿alter table frl."PostPlan" 
+add column if not exists "Description" character varying(2560) NULL;

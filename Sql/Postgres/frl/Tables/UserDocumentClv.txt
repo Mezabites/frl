@@ -1,0 +1,27 @@
+﻿CREATE TABLE IF NOT EXISTS frl."UserDocumentClv"
+(
+    "Id"                	uuid                            NOT NULL
+,   "RowCreated"        	timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       	timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "UserDocumentId"    	uuid                            NOT NULL
+,   "AdditionalTypeClvId"   uuid                            NOT NULL
+,   CONSTRAINT "PK_UserDocumentClv" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_UserDocumentClv_UserDocumentId" FOREIGN KEY ("UserDocumentId")
+        REFERENCES frl."UserDocument" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_UserDocumentClv_AdditionalTypeClvId" FOREIGN KEY ("AdditionalTypeClvId")
+        REFERENCES app."ClassifierValue" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+
+CREATE INDEX IF NOT EXISTS "IX_PK_UserDocumentClv_Id"
+    ON frl."UserDocumentClv" USING btree
+    ("Id" ASC NULLS LAST);
+CREATE INDEX IF NOT EXISTS "IX_PK_UserDocumentClv_UserDocumentId"
+    ON frl."UserDocumentClv" USING btree
+    ("UserDocumentId" ASC NULLS LAST);
+CREATE INDEX IF NOT EXISTS "IX_PK_UserDocumentClv_AdditionalTypeClvId"
+    ON frl."UserDocumentClv" USING btree
+    ("AdditionalTypeClvId" ASC NULLS LAST);

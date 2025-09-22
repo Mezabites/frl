@@ -1,0 +1,20 @@
+﻿CREATE TABLE IF NOT EXISTS frl."InventoryStatus"
+(
+    "Id"                    uuid                            NOT NULL
+,   "RowCreated"            timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"           timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "InventoryRequestId"    uuid                            NOT NULL
+,   "ActionClvId"           uuid                            NOT NULL
+,   "UserId"                uuid                                NULL
+,   "Notes"                 character varying(1000)             NULL
+
+,   CONSTRAINT "PK_InventoryStatus" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_InventoryStatus_InventoryRequestId" FOREIGN KEY ("InventoryRequestId")
+        REFERENCES frl."InventoryRequest" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_InventoryStatus_ActionClvId" FOREIGN KEY ("ActionClvId")
+        REFERENCES app."ClassifierValue" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);

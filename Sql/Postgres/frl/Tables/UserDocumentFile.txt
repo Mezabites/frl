@@ -1,0 +1,23 @@
+﻿CREATE TABLE IF NOT EXISTS frl."UserDocumentFile"
+(
+    "Id"                	uuid                            NOT NULL
+,   "RowCreated"        	timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       	timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "UserDocumentId"    	uuid                            NOT NULL
+,	"File"					bytea							NOT NULL
+,	"Name"				    character varying(500)			NOT	NULL
+,	"MimeType"				character varying(250)				NULL
+,	"Extension"				character varying(50)			NOT	NULL
+,   CONSTRAINT "PK_UserDocumentFile" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_UserDocumentFile_UserDocumentId" FOREIGN KEY ("UserDocumentId")
+        REFERENCES frl."UserDocument" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS "IX_PK_UserDocumentFile_Id"
+    ON frl."UserDocumentFile" USING btree
+    ("Id" ASC NULLS LAST);
+CREATE INDEX IF NOT EXISTS "IX_PK_UserDocumentFile_UserDocumentId"
+    ON frl."UserDocumentFile" USING btree
+    ("UserDocumentId" ASC NULLS LAST);

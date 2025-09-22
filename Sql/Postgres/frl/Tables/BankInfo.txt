@@ -1,0 +1,19 @@
+﻿CREATE TABLE IF NOT EXISTS frl."BankInfo"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "UserId"            uuid                            NOT NULL
+,   "BankName"          character varying(256)          NOT NULL
+,   "IBAN"              character varying(30)           NOT NULL
+,   "SWIFT"             character varying(11)           NOT NULL
+,   "Props"             character varying(256)              NULL
+,   "Default"           boolean                         NOT NULL    DEFAULT false
+
+,   CONSTRAINT "PK_BankInfo" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_BankInfo_UserId2" UNIQUE ("UserId", "IBAN")
+,   CONSTRAINT "FK_BankInfo_UserId" FOREIGN KEY ("UserId")
+        REFERENCES adm."User" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

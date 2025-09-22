@@ -1,0 +1,46 @@
+﻿CREATE TABLE IF NOT EXISTS frl."UserDocument"
+(
+    "Id"                	uuid                            NOT NULL
+,   "RowCreated"        	timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       	timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "UserId"		    	uuid                            NOT NULL
+,   "ApprovedByUserId"		uuid                                NULL
+,	"ApproveDate" 		    timestamp(3) with time zone 	 	NULL
+,   "TypeClvId"             uuid                            NOT NULL
+,   "StatusClvId"       	uuid                            NOT NULL
+,   "StatusDate"       	    timestamp(3) with time zone 	NOT NULL
+,   "Name"              	character varying(250)              NULL
+,   "Nr"              	    character varying(250)              NULL
+,   "Issuer"              	character varying(250)              NULL
+,   "IssueDate"             timestamp(3) with time zone         NULL
+,	"ExpirationDate" 		timestamp(3) with time zone 	 	NULL
+,   "Description"       	character varying(1000)             NULL
+,   "DeclinedReason"   	    character varying(1000)		        NULL
+	
+,   CONSTRAINT "PK_UserDocument" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_UserDocument_Nr_UserId" UNIQUE ("Nr", "UserId")
+,   CONSTRAINT "FK_UserDocument_TypeClvId" FOREIGN KEY ("TypeClvId")
+        REFERENCES app."ClassifierValue" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+,   CONSTRAINT "FK_UserDocument_UserId" FOREIGN KEY ("UserId")
+        REFERENCES adm."User" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS "IX_PK_UserDocument_Id"
+    ON frl."UserDocument" USING btree
+    ("Id" ASC NULLS LAST);
+CREATE INDEX IF NOT EXISTS "IX_UserDocument_ExpirationDate"
+    ON frl."UserDocument" USING btree
+    ("ExpirationDate" ASC NULLS LAST);
+CREATE INDEX IF NOT EXISTS "IX_UserDocument_UserId"
+    ON frl."UserDocument" USING btree
+    ("UserId");
+CREATE INDEX IF NOT EXISTS "IX_UserDocument_TypeClvId"
+    ON frl."UserDocument" USING btree
+    ("TypeClvId");
+CREATE INDEX IF NOT EXISTS "IX_UserDocument_ApprovedByUserId"
+    ON frl."UserDocument" USING btree
+    ("ApprovedByUserId");

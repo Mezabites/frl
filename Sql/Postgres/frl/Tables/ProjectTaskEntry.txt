@@ -1,0 +1,29 @@
+﻿CREATE TABLE IF NOT EXISTS frl."ProjectTaskEntry" 
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "ProjectTaskId"     uuid                            NOT NULL
+,   "PostId"            uuid                                NULL
+,   "PostShiftId"       uuid                                NULL
+,   "Hours"             integer                             NULL
+,   "Units"             integer                         NOT NULL
+,   "Days"              integer                         NOT NULL    DEFAULT 1
+,   "WorkerPayment"     decimal                         NOT NULL
+,   "ClientPayment"     decimal                         NOT NULL
+,   "Notes"             character varying(1000)             NULL
+
+,   CONSTRAINT "PK_ProjectEntry" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_ProjectEntry_ProjectTaskId" FOREIGN KEY ("ProjectTaskId")
+        REFERENCES frl."ProjectTask" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_ProjectEntry_PostId" FOREIGN KEY ("PostId")
+        REFERENCES frl."Post" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+,   CONSTRAINT "FK_ProjectEntry_PostShiftId" FOREIGN KEY ("PostShiftId")
+        REFERENCES frl."PostShift" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);

@@ -1,0 +1,27 @@
+﻿CREATE TABLE IF NOT EXISTS frl."ProjectTask" 
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "ProjectId"         uuid                            NOT NULL
+,   "ClientContactId"   uuid                                NULL
+,   "HolderUserId"      uuid                                NULL
+,   "Name"              character varying(255)          NOT NULL
+,   "StartTime"         timestamp(3) with time zone     NOT NULL
+,   "EndTime"           timestamp(3) with time zone     NOT NULL
+,   "Notes"             character varying(1000)             NULL
+
+,   CONSTRAINT "PK_ProjectTask" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_ProjectTask_ProjectId" FOREIGN KEY ("ProjectId")
+        REFERENCES frl."Project" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FKProjectTask_ClientContactId" FOREIGN KEY ("ClientContactId")
+        REFERENCES frl."ClientContact" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+,   CONSTRAINT "FK_ProjectTask_HolderUserId" FOREIGN KEY ("HolderUserId")
+        REFERENCES adm."User" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);

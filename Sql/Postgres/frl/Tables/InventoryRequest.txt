@@ -1,0 +1,18 @@
+﻿CREATE TABLE IF NOT EXISTS frl."InventoryRequest"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "InventoryId"       uuid                            NOT NULL
+,   "UserId"            uuid                            NOT NULL
+,   "Count"             int                             NOT NULL
+,   "ReceiveDate"       date                                NULL
+,   "Active"            boolean                         NOT NULL    default TRUE
+,   "InventoryStatusId" uuid                                NULL
+
+,   CONSTRAINT "PK_InventoryRequest" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_InventoryRequest_InventoryId" FOREIGN KEY ("InventoryId")
+        REFERENCES frl."Inventory" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

@@ -1,0 +1,29 @@
+﻿CREATE TABLE IF NOT EXISTS frl."Project"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "Name"              character varying(256)          NOT NULL
+,   "StatusClvId"       uuid                            NOT NULL
+,   "Number"            character varying(25)           NOT NULL
+,   "Start"             date                            NOT NULL
+,   "End"               date                            NOT NULL
+,   "ClientId"          uuid                                NULL
+,   "ClientContactId"   uuid                                NULL
+,   "Address"           character varying(1000)         NOT NULL
+,   "Description"       character varying(1000)             NULL
+
+,   CONSTRAINT "PK_Project" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_Project_ClientId" FOREIGN KEY ("ClientId")
+        REFERENCES frl."Client" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+,   CONSTRAINT "FK_Project_ClientContactId" FOREIGN KEY ("ClientContactId")
+        REFERENCES frl."ClientContact" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+,   CONSTRAINT "FK_Project_StatusClvId" FOREIGN KEY ("StatusClvId")
+        REFERENCES app."ClassifierValue" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);

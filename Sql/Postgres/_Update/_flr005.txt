@@ -1,0 +1,2 @@
+﻿ALTER TABLE frl."ApiSync"
+	ADD COLUMN IF NOT EXISTS "LastSyncId" uuid NULL;

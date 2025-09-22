@@ -1,0 +1,25 @@
+﻿CREATE TABLE IF NOT EXISTS frl."LanguageSkills"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "UserId"            uuid                            NOT NULL
+,   "LanguageClvId"     uuid                            NOT NULL
+,   "LevelClvId"        uuid                            NOT NULL
+,   "Notes"             character varying(1000)             NULL
+
+,   CONSTRAINT "PK_LanguageSkills" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_LanguageSkills_UserId2" UNIQUE ("UserId", "LanguageClvId")
+,   CONSTRAINT "FK_LanguageSkills_UserId" FOREIGN KEY ("UserId")
+        REFERENCES adm."User" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_LanguageSkills_LanguageClvId" FOREIGN KEY ("LanguageClvId")
+        REFERENCES app."ClassifierValue" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_LanguageSkills_LevelClvId" FOREIGN KEY ("LevelClvId")
+        REFERENCES app."ClassifierValue" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

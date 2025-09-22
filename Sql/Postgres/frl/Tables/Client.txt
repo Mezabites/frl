@@ -1,0 +1,36 @@
+﻿CREATE TABLE IF NOT EXISTS frl."Client"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "Name"              character varying(256)          NOT NULL
+,   "Email"             character varying(256)          NOT NULL
+,   "Type"              smallint                        NOT NULL
+,   "Status"            smallint                        NOT NULL
+,   "RegNumber"         character varying(19)           NOT NULL
+,   "WatNumber"         character varying(30)               NULL
+,   "Phone"             character varying(100)              NULL
+,   "InvoiceInfo"       character varying(2560)             NULL
+,   "OrganizationId"    uuid                            NOT NULL
+,   "LinkId"            uuid                                NULL
+
+,   CONSTRAINT "PK_Client" PRIMARY KEY ("Id")
+);
+
+DO $$ 
+BEGIN 
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'UQ_Client_ExternalId') THEN 
+        CREATE UNIQUE INDEX "UQ_Client_ExternalId"
+        ON frl."Client" ("ExternalId", "OrganizationId")
+        WHERE "ExternalId" IS NOT NULL;
+    END IF;
+END $$;
+
+DO $$ 
+BEGIN 
+    IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = 'UQ_Client_RegNumber') THEN 
+        CREATE UNIQUE INDEX "UQ_Client_RegNumber"
+        ON frl."Client" ("RegNumber", "OrganizationId")
+        WHERE "RegNumber" IS NOT NULL;
+    END IF;
+END $$;

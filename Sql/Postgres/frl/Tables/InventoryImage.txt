@@ -1,0 +1,15 @@
+﻿CREATE TABLE IF NOT EXISTS frl."InventoryImage"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "InventoryId"       uuid                            NOT NULL
+,   "Name"              character varying(250)          NOT NULL
+,   "File"              bytea                           NOT NULL
+
+,   CONSTRAINT "PK_InventoryImage" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_InventoryImage_InventoryId" FOREIGN KEY ("InventoryId")
+        REFERENCES frl."Inventory" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

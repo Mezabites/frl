@@ -1,0 +1,55 @@
+﻿CREATE TABLE IF NOT EXISTS frl."Post"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "Name"              character varying(256)          NOT NULL
+,   "Description"       character varying(2560)             NULL
+,   "Start"             date                                NULL
+,   "End"               date                                NULL
+
+,   CONSTRAINT "PK_Post" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_Post_Name" UNIQUE ("Name", "Start")
+);
+
+
+CREATE TABLE IF NOT EXISTS frl."PostPlan"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "PostId"            uuid                            NOT NULL
+,   "Name"              character varying(256)          NOT NULL
+,   "AfterHour"         integer                         NOT NULL
+,   "WorkerPayment"     decimal                         NOT NULL
+,   "ClientPayment"     decimal                         NOT NULL
+,   "Description"       character varying(2560)             NULL
+
+,   CONSTRAINT "PK_PostPlan" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_PostPlan_Name" UNIQUE ("Name", "PostId")
+,   CONSTRAINT "FK_PostPlan_PostId" FOREIGN KEY ("PostId")
+        REFERENCES frl."Post" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS frl."PostShift"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "PostId"            uuid                            NOT NULL
+,   "Name"              character varying(256)          NOT NULL
+,   "WorkerPayment"     decimal                         NOT NULL
+,   "ClientPayment"     decimal                         NOT NULL
+,   "ReportHours"       boolean                         NOT NULL
+,   "MaxHours"          integer                             NULL
+,   "Description"       character varying(2560)             NULL
+
+,   CONSTRAINT "PK_PostShift" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_PostShift_Name" UNIQUE ("Name", "PostId")
+,   CONSTRAINT "FK_PostShift_PostId" FOREIGN KEY ("PostId")
+        REFERENCES frl."Post" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

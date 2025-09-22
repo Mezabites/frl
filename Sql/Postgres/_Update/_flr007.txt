@@ -1,0 +1,5 @@
+﻿ALTER TABLE frl."ProjectTask"
+    ADD COLUMN IF NOT EXISTS "EndTime" timestamp(3) with time zone DEFAULT NOW() NOT NULL;
+
+ALTER TABLE frl."ProjectTaskEntry" 
+	ADD COLUMN IF NOT EXISTS "Days" integer NOT NULL DEFAULT 1

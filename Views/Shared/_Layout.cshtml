@@ -1,0 +1,342 @@
+@using Admin = eFlex.Index.Base.Controllers.Admin;
+@using App = eFlex.Index.Base.Controllers.App;
+@using frlnet.Controllers.Admin;
+@using frl = frlnet.Controllers.frl;
+@using Public = frlnet.Controllers.Public;
+@using System.Reflection;
+@using Kendo.Mvc.UI;
+@using Kendo.Mvc.UI.Fluent;
+@using eFlex.Common.Extensions;
+@using eFlex.Index.Base.Attributes;
+@using eFlex.Index.Base.Controllers;
+@using eFlex.Index.Base.Extensions;
+@using eFlex.Index.Base.Models.Admin;
+@using eFlex.Index.Base.Models.App;
+@using eFlex.Index.Demo.Resource;
+ 
+@model object
+
+<!DOCTYPE html>
+<html lang="@LabelLanguageModel.Current?.Key.ToLower()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @AppSettings.ProjectName</title>
+
+
+    <script src="~/lib/kendo/js/jquery.min.js"></script>
+    <script src="~/lib/kendo/js/kendo.all.min.js"></script>
+    <script src="~/lib/kendo/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/lib/kendo/js/jszip.min.js"></script>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/bootstrap.custom.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/bootstrap.custom.min.css" />
+    </environment>
+
+    <link href="~/css/site.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/kendo.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/index.css" asp-append-version="true" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/@ThemeModel.Current.KendoTheme" />
+
+</head>
+<body class="k-body">
+    <header>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-0 border-bottom box-shadow">
+            <div class="container-fluid">
+                @if (UserModel.CurrentId.HasValue)
+                {
+                //Short logo.
+                    <a class="navbar-brand" href="javascript:void(0);" onclick="safeHref('@Link.BuildHref(typeof(HomeController), nameof(HomeController.Index), null, true)', null);">
+                        <div class="logo-section">
+                            <div class="logo-image">
+                                <div class="logo-elements">
+                                    <div class="logo-element__left"></div>
+                                    <div class="logo-element__right"></div>
+                                </div>
+                            </div>
+                            <div class="logo-title">
+                                <div class="logo-title___text k-menu k-link">@AppSettings.ProjectName</div>
+                            </div>
+                        </div>
+                    </a>
+                }
+                else
+                {
+                //Long logo
+                    <div class="logo-section col-md-6">
+                        <div class="logo-image">
+                            <div class="logo-elements">
+                                <div class="logo-element__left"></div>
+                                <div class="logo-element__right"></div>
+                            </div>
+                        </div>
+                        <div class="logo-title">
+                            <div class="logo-title___text">@(AppSettings.ProjectNameLong ?? AppSettings.ProjectName)</div>
+                        </div>
+                    </div>
+                }
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+
+                    @if (UserModel.CurrentId.HasValue && !eFlex.Index.Base.Filters.RedirectFilter.RedirectRequired(Context))
+                    {
+
+                        @(
+                            Html.Kendo().Menu()
+                            .Name("Menu")
+                            .Items(async items =>
+                            {
+
+                                var group = items.Add().Text(@LabelFieldModel.GetValue(typeof(AreaAttribute), nameof(Public)).Text).Items(async subItems =>
+                                {
+                                    subItems.Add(Link.To<Public.UserController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<Public.UserDocumentController>(f => f.IndexAllow(true)));
+                                });
+                                group.Visible(group.ToItem().Items.Count > 0);
+
+                                group = items.Add().Text(@LabelFieldModel.GetValue(typeof(AreaAttribute), nameof(frl)).Text).Items(async subItems =>
+                                {
+                                    subItems.Add(Link.To<frl.InventoryController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<frl.InventoryRequestController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<frl.UserDocumentController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<frl.ClientController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<frl.PostController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<frl.ProjectController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<frl.ApiSyncController>(f => f.IndexAllow(true)));
+                                });
+                                group.Visible(group.ToItem().Items.Count > 0);
+
+                                group = items.Add().Text(@LabelFieldModel.GetValue(typeof(AreaAttribute), nameof(Admin)).Text).Items(async subItems =>
+                                {
+                                    subItems.Add(Link.To<UserController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<Admin.RoleController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<Admin.OrganizationController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<Admin.SessionController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<Admin.AuditRootController>(f => f.EditAllow(Guid.Empty)));
+                                    subItems.Add(Link.To<Admin.SendEmailController>(f => f.IndexAllow(true)));
+                                   @*  subItems.Add(Link.To<Admin.SettingController>(f => f.IndexAllow(true))); *@
+                                   @* subItems.Add(Link.To<Admin.MessageController>(f => f.IndexAllow(true)));*@
+                                });
+                                group.Visible(group.ToItem().Items.Count > 0);
+
+                                group = items.Add().Text(@LabelFieldModel.GetValue(typeof(AreaAttribute), nameof(App)).Text).Items(async subItems =>
+                                {
+                                    subItems.Add(Link.To<App.ClassifierController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<App.ParameterController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<App.LabelLanguageController>(f => f.IndexAllow(true)));
+                                    @*subItems.Add(Link.To<App.EmailConfigController>(f => f.IndexAllow(true)));*@
+                                    @*subItems.Add(Link.To<App.NotificationController>(f => f.IndexAllow(true)));*@
+                                    subItems.Add(Link.To<App.DataHistoryRootController>(f => f.EditAllow(Guid.Empty)));
+                                    subItems.Add(Link.To<App.JobController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<App.JobPlanController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<App.JobExecutionController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<App.ThemeController>(f => f.EditAllow(Guid.Empty)));
+                                   @* subItems.Add(Link.To<App.HomepageContentController>(f => f.IndexAllow(true)));*@
+                                    subItems.Add(Link.To<App.EmailTemplateController>(f => f.IndexAllow(true)));
+                                    subItems.Add(Link.To<App.ExceptionController>(f => f.IndexAllow(true)));
+                                });
+                                group.Visible(group.ToItem().Items.Count > 0);
+                            }
+                            )
+                            )
+                    }
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item me-2">
+
+                            @(Html.Kendo().Button()
+                                .Name("switchStyleBtn")
+                                .HtmlAttributes(new { type = "button" })
+                                .Events(e => e.Click("switchStyleApply"))
+                                .Content(">"))
+
+                            <script>
+                                function switchStyleApply(e) {
+                                    var ctrlId = $("#switchStyleBtn");
+                                    var url = "@(Link.To<HomeController>(f => f.SwitchPageStyle()).ToString())";
+                                    if (ctrlId.text() == "<") {
+                                        ctrlId.text(">");
+                                    } else {
+                                        ctrlId.text("<");
+                                    }
+
+                                    //pārslēdz uz šauro
+                                    var params = {};
+                                    function callBack(data) {
+                                        if ($("#input-container").hasClass("container-fluid")) {
+                                            $("#input-container").attr("class", "container mt-3");
+                                        }
+                                        //pārslēdz uz plato
+                                        else {
+                                            $("#input-container").attr("class", "container-fluid mt-3");
+                                        }
+                                        kendoGridRefreshAll();
+                                    }
+
+                                    ajaxGet(url, params, callBack);
+                                }
+                            </script>
+
+                        </li>
+
+                        <li class="nav-item me-2">
+                            @{
+                                var languageSource = AutoProcedure.Of<LabelLanguageModel>().GetRange();
+                                var languageDropDownSource = languageSource.Where(f => f.Name != "System").Select(f => new { key = f.Key.ToUpper(), shortName = f.Key.ToUpper() }).ToArray();
+                                var cookieValue = languageSource.FirstOrDefault(f => f.Id == LabelLanguageModel.CurrentId);
+                                var selectedIndex = cookieValue is null ? 0 : Array.FindIndex(languageDropDownSource, f => f.key == cookieValue.Key.ToUpper());
+                            }
+                            @(Html.Kendo().DropDownList()
+                                .Name("switchLanguageBnt")
+                                .DataTextField("shortName")
+                                .DataValueField("key")
+                                .SelectedIndex(selectedIndex)
+                                .HtmlAttributes(new { style = "width:80px; display: contents;", })
+                                .BindTo(languageDropDownSource)
+                                .Events(f => f.Change("switchLanguageApply")))
+
+                            <script>
+                                function switchLanguageApply(e) {
+                                    var ctrlId = $("#switchLanguageBnt");
+                                    var url = "@(Link.To<HomeController>(f => f.SwitchLanguage(null!)).ToString())";
+                                    var selectedValue = ctrlId.data("kendoDropDownList").value();
+
+                                    var params = { key: selectedValue };
+                                    function callBack(data) {
+                                        location.reload();
+                                    }
+
+                                    ajaxGet(url, params, callBack);
+                                }
+                            </script>
+                        </li>
+
+                        @if (UserModel.CurrentId.HasValue)
+                        {
+                            <li class="nav-item me-2">
+                                @{
+                                    var userModel = UserModel.Current;
+                                    string userFullName = $"{userModel?.FirstName} {userModel?.LastName}";
+                                }
+
+                                @(Html.Kendo().Button()
+                                    .Name("profileBtn")
+                                    .HtmlAttributes(new
+                                    {
+                                        type = "button",
+                                        url = Link.BuildHref(typeof(ProfileRootController), nameof(ProfileRootController.Edit), null, true)
+                                    })
+                                    .Icon("user")
+                                    .Events(e => e.Click("indexDefault"))
+                                    .Content(userFullName))
+                            </li>
+
+                            <li class="nav-item me-2">
+                                @{
+                                    var orgModel = OrganizationModel.Current;
+                                    string orgFullName = $"{orgModel?.Name}";
+                                }
+
+                                @(Html.Kendo().Button()
+                                    .Name("changeOrgBtn")
+                                    .HtmlAttributes(new
+                                    {
+                                        type = "button",
+                                        url = Link.BuildHref(typeof(OrganizationChoiceController), nameof(OrganizationChoiceController.Index), null, true)
+                                    })
+                                    .Icon("globe")
+                                    .Events(e => e.Click("indexDefault"))
+                                    .Content(orgFullName))
+                            </li>
+
+                            <li class="nav-item me-2">
+                                @(Html.Kendo().Button()
+                                    .Name("logoutBtn")
+                                    .HtmlAttributes(new
+                                    {
+                                        type = "button",
+                                        url = Link.BuildHref(typeof(LoginController), nameof(LoginController.Logout), null, true)
+                                    })
+                                    .Icon("logout")
+                                    .Events(e => e.Click("indexDefault"))
+                                    .Content(Labels.Logout))
+                            </li>
+                        }
+                        else
+                        {
+
+                            <li class="nav-item me-2">
+                                @(
+                                    Html.Kendo().Button()
+                                    .Name("login")
+                                    .Content(Labels.Login)
+                                    .HtmlAttributes(new { url = Link.BuildHref(typeof(LoginController), nameof(LoginController.UsernameAndPassword)), @class = "k-button-solid-primary" })
+                                    .Events(e => e.Click("indexDefault"))
+                                    )
+                            </li>
+
+                            <li class="nav-item me-2">
+                                @(
+                                    Html.Kendo().Button()
+                                    .Name("register")
+                                    .Content(Labels.Register)
+                                    .HtmlAttributes(new { url = Link.BuildHref(typeof(frlnet.Controllers.Admin.UserRegisterController), nameof(frlnet.Controllers.Admin.UserRegisterController.Create)), @class = "k-button-solid-primary" })
+                                    .Events(e => e.Click("indexDefault"))
+                                    )
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        @*Fix anoying navigation drop-down cluse issues*@
+        <script>
+            $('.navbar').find('.dropdown-menu').css('margin-top', '-10px');
+        </script>
+    </header>
+
+    @{
+        var isMinWidth = (Context.Session.GetString("isMinWide") == true.ToString());
+    }
+
+    <div class="container@(isMinWidth == false?"-fluid ": "") mt-3" id="input-container">
+
+        @await this.Html.PartialAsync("~/Views/Shared/_IndexNavigationPartial.cshtml", Model)
+
+        @*Loading cover*@
+        <div id="cover" class="cover">
+            <div id="dual-ring">
+                <div class="lds-dual-ring text-center"></div>
+            </div>
+        </div>
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top page-footer text-muted footer-fixed border-top box-shadow">
+        <div class="container text-center text-md-left">
+        </div>
+        <div class="footer-copyright text-center footer-style">
+            &copy; @AppSettings.ProjectOwner –
+            <a href="@Link.BuildHref(typeof(HomeController), nameof(HomeController.ChangeLog), null)" style="color:white;">
+                @AppSettings.ProjectName @ChangeLogReader.CurrentVersionNr @ChangeLogReader.CurrentVersionDate.ToShortDateString()
+            </a>
+        </div>
+    </footer>
+
+    @await this.Html.PartialAsync("~/Views/Shared/_Constants.cshtml", Model)
+
+</body>
+</html>

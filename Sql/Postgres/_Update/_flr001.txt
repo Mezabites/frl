@@ -1,0 +1,5 @@
+﻿ALTER TABLE adm."User"
+	ALTER COLUMN "PersonCode" DROP NOT NULL;
+
+ALTER TABLE frl."UserDocument"
+	ALTER COLUMN "Name" DROP NOT NULL;

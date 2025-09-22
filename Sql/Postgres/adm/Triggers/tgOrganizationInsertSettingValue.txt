@@ -1,0 +1,33 @@
+﻿CREATE OR REPLACE FUNCTION adm."fnOrganizationInsertSettingValue"()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    INSERT INTO adm."SettingValue" ("Id", "RowCreated", "RowModified", "SettingId", "OrganizationId", "Value")
+    SELECT
+        gen_random_uuid(),
+        CURRENT_TIMESTAMP(3),
+        CURRENT_TIMESTAMP(3),
+        s."Id",
+        NEW."Id",
+        s."DefaultValue"
+    FROM
+        adm."Setting" s;
+
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+-- Drop the trigger if it exists
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'tgOrganizationInsertSettingValue') THEN
+        DROP TRIGGER "tgOrganizationInsertSettingValue" ON adm."Organization";
+    END IF;
+END $$;
+
+-- Create the trigger
+CREATE TRIGGER "tgOrganizationInsertSettingValue"
+AFTER INSERT ON adm."Organization"
+FOR EACH ROW
+EXECUTE FUNCTION adm."fnOrganizationInsertSettingValue"();

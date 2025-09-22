@@ -1,0 +1,20 @@
+﻿DROP VIEW IF EXISTS frl."vwProjectTask" CASCADE; 
+
+CREATE OR REPLACE VIEW frl."vwProjectTask" AS
+SELECT 
+    pt.*,
+    pt."Id" AS "TaskId",
+    COALESCE(SUM(pte."WorkerPayment"), 0) AS "TotalWorkerPayment",
+    COALESCE(SUM(pte."ClientPayment"), 0) AS "TotalClientPayment",
+    COUNT(pte."Id") AS "EntryCount",
+    CEIL(EXTRACT(EPOCH FROM (pt."EndTime" - pt."StartTime")) / 3600) AS "Hours"
+FROM frl."ProjectTask" pt
+LEFT JOIN frl."ProjectTaskEntry" pte
+    ON pt."Id" = pte."ProjectTaskId"
+GROUP BY pt."Id";
+
+
+--Lines below are executed by ScriptRunner
+--RunScript: vwProjectPlanTask.txt
+--RunScript: vwProjectEstimateTask.txt
+--RunScript: vwProjectEstimate.txt

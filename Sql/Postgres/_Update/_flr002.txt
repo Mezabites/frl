@@ -1,0 +1,2 @@
+﻿ALTER TABLE adm."User"
+	ADD COLUMN IF NOT EXISTS "DateOfBirth" date NULL;

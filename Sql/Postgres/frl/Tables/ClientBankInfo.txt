@@ -1,0 +1,22 @@
+﻿CREATE TABLE IF NOT EXISTS frl."ClientBankInfo"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "ClientId"          uuid                            NOT NULL
+,   "ExternalId"        character varying(256)              NULL
+,   "BankAccount"       character varying(30)           NOT NULL
+,   "BankName"          character varying(256)          NOT NULL
+,   "BankCode"          character varying(11)               NULL
+,   "PaymentNote"       character varying(2560)             NULL
+,   "IsDefault"         boolean                             NULL
+,   "LinkId"            uuid                                NULL
+
+,   CONSTRAINT "PK_ClientBankInfo" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_ClientBankInfo_ExternalId" UNIQUE ("ExternalId", "ClientId")
+,   CONSTRAINT "UQ_ClientBankInfo_BankAccount" UNIQUE ("BankAccount", "ClientId")
+,   CONSTRAINT "FK_ClientBankInfo_ClientId" FOREIGN KEY ("ClientId")
+        REFERENCES frl."Client" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

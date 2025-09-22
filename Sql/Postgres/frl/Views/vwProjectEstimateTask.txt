@@ -1,0 +1,17 @@
+﻿DROP VIEW IF EXISTS frl."vwProjectEstimateTask" CASCADE;
+CREATE OR REPLACE VIEW frl."vwProjectEstimateTask" AS
+SELECT 
+    pet."Id" AS "Id",
+    pet."ProjectEstimateId",
+    pet."ProjectTaskId",
+    pet."SourcePlanTaskId",
+    vpt."ProjectId",
+    vpt."TaskId",
+    vpt."TotalWorkerPayment",
+    vpt."TotalClientPayment",
+    vpt."EntryCount"
+FROM frl."ProjectEstimateTask" pet
+LEFT JOIN frl."vwProjectTask" vpt
+    ON pet."ProjectTaskId" = vpt."TaskId";
+
+--RunScript: vwProjectEstimate.txt

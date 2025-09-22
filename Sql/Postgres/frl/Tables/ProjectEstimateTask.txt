@@ -1,0 +1,25 @@
+﻿DROP TABLE frl."ProjectEstimateTask" CASCADE;
+
+CREATE TABLE IF NOT EXISTS frl."ProjectEstimateTask"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "ProjectEstimateId" uuid                            NOT NULL
+,   "ProjectTaskId"     uuid                            NOT NULL
+,   "SourcePlanTaskId"  uuid                            NOT NULL
+
+,   CONSTRAINT "PK_ProjectEstimateTask" PRIMARY KEY ("Id")
+,   CONSTRAINT "FK_ProjectEstimateTask_ProjectEstimateId" FOREIGN KEY ("ProjectEstimateId")
+        REFERENCES frl."ProjectEstimate" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_ProjectEstimateTask_ProjectTaskId" FOREIGN KEY ("ProjectTaskId")
+        REFERENCES frl."ProjectTask" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_ProjectEstimateTask_SourcePlanTaskId" FOREIGN KEY ("SourcePlanTaskId")
+        REFERENCES frl."ProjectPlanTask" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+

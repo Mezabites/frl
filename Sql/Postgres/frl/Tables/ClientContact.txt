@@ -1,0 +1,22 @@
+﻿CREATE TABLE IF NOT EXISTS frl."ClientContact"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "ClientId"          uuid                            NOT NULL
+,   "ExternalId"        character varying(256)              NULL
+,   "Name"              character varying(256)          NOT NULL
+,   "Email"             character varying(256)          NOT NULL
+,   "Phone"             character varying(100)              NULL
+,   "AdditionalInfo"    character varying(2560)             NULL
+,   "IsDefault"         boolean                             NULL
+,   "LinkId"            uuid                                NULL
+
+,   CONSTRAINT "PK_ClientContact" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_ClientContact_ExternalId" UNIQUE ("ClientId", "ExternalId")
+,   CONSTRAINT "UQ_ClientContact_Email" UNIQUE ("ClientId", "Email")
+,   CONSTRAINT "FK_ClientContact_ClientId" FOREIGN KEY ("ClientId")
+        REFERENCES frl."Client" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

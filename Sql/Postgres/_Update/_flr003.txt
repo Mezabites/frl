@@ -1,0 +1,1 @@
+﻿DELETE FROM app."LabelLanguage" WHERE "Key" = 'lv'

@@ -1,0 +1,15 @@
+﻿CREATE TABLE IF NOT EXISTS adm."Setting"
+(
+    "Id"            uuid                            NOT NULL
+,   "RowCreated"    timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"   timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "Code"          character varying(100)          NOT NULL
+,   "Name"          character varying(250)          NOT NULL
+,   "Category"      character varying(250)              NULL
+,   "Type"          character varying(250)          NOT NULL
+,   "DefaultValue"  character varying(250)              NULL
+,   "Description"	character varying(250)	            NULL
+
+,   CONSTRAINT "PK_Setting" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_Setting_Code" UNIQUE ("Code")
+);

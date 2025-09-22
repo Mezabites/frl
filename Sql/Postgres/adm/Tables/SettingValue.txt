@@ -1,0 +1,20 @@
+﻿CREATE TABLE IF NOT EXISTS adm."SettingValue"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    default CURRENT_TIMESTAMP(3)
+,   "SettingId"         uuid                            NOT NULL
+,   "OrganizationId"    uuid                            NOT NULL
+,   "Value"             character varying(250)              NULL
+
+,   CONSTRAINT "PK_SettingValue" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_SettingValue_SettingId" UNIQUE ("SettingId", "OrganizationId")
+,   CONSTRAINT "FK_SettingValue_SettingId" FOREIGN KEY ("SettingId")
+        REFERENCES adm."Setting" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+,   CONSTRAINT "FK_SettingValue_OrganizationId" FOREIGN KEY ("OrganizationId")
+        REFERENCES adm."Organization" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);

@@ -1,0 +1,3 @@
+﻿alter table frl."ProjectEstimate" alter column "EntryColumns" drop not null;
+
+--RunScript: vwProjectEstimate.txt

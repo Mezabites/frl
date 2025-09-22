@@ -1,0 +1,13 @@
+﻿DROP VIEW IF EXISTS frl."vwProjectReportTask";
+CREATE OR REPLACE VIEW frl."vwProjectReportTask" AS
+SELECT 
+    ppt."Id" AS "Id",
+    vpt."ProjectId",
+    ppt."ProjectTaskId",
+    vpt."TaskId",
+    vpt."TotalWorkerPayment",
+    vpt."TotalClientPayment",
+    vpt."EntryCount"
+FROM frl."ProjectReportTask" ppt
+LEFT JOIN frl."vwProjectTask" vpt
+    ON ppt."ProjectTaskId" = vpt."TaskId";

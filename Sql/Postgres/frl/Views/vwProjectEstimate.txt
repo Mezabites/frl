@@ -1,0 +1,23 @@
+﻿DROP VIEW IF EXISTS frl."vwProjectEstimate";
+
+CREATE OR REPLACE VIEW frl."vwProjectEstimate" AS
+SELECT 
+    pe."Id" AS "Id",
+    pe."RowCreated",
+    pe."RowModified",
+    pe."ProjectId",
+    pe."Name",
+    pe."Number",
+    pe."StatusClvId",
+    pe."ClientContactId",
+    pe."Notes",
+    pe."TaskColumns",
+    pe."EntryColumns",
+    COALESCE(SUM(vpet."TotalWorkerPayment"), 0) AS "TotalWorkerPayment",
+    COALESCE(SUM(vpet."TotalClientPayment"), 0) AS "TotalClientPayment",
+    COUNT(DISTINCT vpet."ProjectTaskId") AS "TotalTaskCount",
+    SUM(vpet."EntryCount") AS "TotalEntryCount"
+FROM frl."ProjectEstimate" pe
+LEFT JOIN frl."vwProjectEstimateTask" vpet
+    ON pe."Id" = vpet."ProjectEstimateId"
+GROUP BY pe."Id";

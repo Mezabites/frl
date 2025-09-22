@@ -1,0 +1,14 @@
+﻿CREATE TABLE IF NOT EXISTS frl."ApiSync"
+(
+    "Id"                uuid                            NOT NULL
+,   "RowCreated"        timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "RowModified"       timestamp(3) with time zone     NOT NULL    DEFAULT CURRENT_TIMESTAMP(3)
+,   "Name"              character varying(256)              NULL
+,   "Key"               character varying(256)              NULL
+,   "Token"             character varying(256)              NULL
+,   "OrganizationId"    uuid                            NOT NULL
+,   "LastSyncId"        uuid                                NULL
+
+,   CONSTRAINT "PK_ApiSync" PRIMARY KEY ("Id")
+,   CONSTRAINT "UQ_ApiSync_OrganizationId" UNIQUE ("OrganizationId")
+);

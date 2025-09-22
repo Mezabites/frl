@@ -1,0 +1,5 @@
+﻿ALTER TABLE frl."BankInfo"
+	ADD COLUMN IF NOT EXISTS "Props" character varying(256) NULL;
+
+ALTER TABLE frl."BankInfo"
+	ADD COLUMN IF NOT EXISTS "Default" boolean NOT NULL DEFAULT false;
