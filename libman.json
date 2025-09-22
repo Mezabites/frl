@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "@progress/kendo-theme-bootstrap@6.7.0",
+      "destination": "wwwroot/lib/kendo-theme-bootstrap/"
+    },
+    {
+      "library": "@progress/kendo-theme-utils@6.7.0",
+      "destination": "wwwroot/lib/kendo-theme-utils/"
+    },
+    {
+      "library": "@progress/kendo-theme-core@6.7.0",
+      "destination": "wwwroot/lib/kendo-theme-core/"
+    },
+    {
+      "library": "@progress/kendo-theme-fluent@6.7.0",
+      "destination": "wwwroot/lib/kendo-theme-fluent/"
+    },
+    {
+      "library": "@progress/kendo-theme-nouvelle@6.7.0",
+      "destination": "wwwroot/lib/progress/kendo-theme-nouvelle/"
+    },
+    {
+      "library": "@progress/kendo-theme-classic@6.7.0",
+      "destination": "wwwroot/lib/kendo-theme-classic/"
+    }
+  ]
+}
