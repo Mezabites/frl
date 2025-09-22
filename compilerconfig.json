@@ -1,0 +1,146 @@
+﻿[
+  {
+    "outputFile": "wwwroot/scss/_bootswatch.css",
+    "inputFile": "wwwroot/scss/_bootswatch.scss"
+  },
+  {
+    "outputFile": "wwwroot/scss/_variables.css",
+    "inputFile": "wwwroot/scss/_variables.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/bootstrap.custom.css",
+    "inputFile": "wwwroot/css/bootstrap.custom.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/all.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/all.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo/css/kendo.custom.css",
+    "inputFile": "wwwroot/lib/kendo/css/kendo.custom.scss"
+  },
+  {
+    "outputFile": "wwwroot/CustomKendo/index.css",
+    "inputFile": "wwwroot/CustomKendo/index.scss"
+  },
+  {
+    "outputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/material-aqua-dark.css",
+    "inputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/material-aqua-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/material-sky.css",
+    "inputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/material-sky.scss"
+  },
+  {
+    "outputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/all.css",
+    "inputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/all.scss"
+  },
+  {
+    "outputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/meta/variables.css",
+    "inputFile": "wwwroot/CustomKendo/progress/kendo-theme-material/dist/meta/variables.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-main.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-main.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-aqua-dark.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-aqua-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-arctic.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-arctic.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-burnt-teal.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-burnt-teal.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-dataviz-v4.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-dataviz-v4.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-eggplant.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-eggplant.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-lime.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-lime.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-lime-dark.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-lime-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-main-dark.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-main-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-nova.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-nova.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-pacific.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-pacific.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-pacific-dark.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-pacific-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-sky.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-sky.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-sky-dark.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-sky-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/progress/kendo-theme-material/dist/material-smoke.css",
+    "inputFile": "wwwroot/progress/kendo-theme-material/dist/material-smoke.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-main-dark.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-main-dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-main.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-main.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-green.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-green.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-dataviz-v4.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-dataviz-v4.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-blue.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-blue.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-nordic.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-nordic.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-ocean-blue.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-ocean-blue.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-orange.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-orange.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-purple.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-purple.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-turquoise.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-turquoise.scss"
+  },
+  {
+    "outputFile": "wwwroot/lib/kendo-theme-default/dist/default-urban.css",
+    "inputFile": "wwwroot/lib/kendo-theme-default/dist/default-urban.scss"
+  }
+]
