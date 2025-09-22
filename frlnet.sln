@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "frlnet", "frlnet\frlnet.csproj", "{F91DB6CF-8D00-400D-A9A8-FBF2686DC286}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eFlex.Common", "..\kadis\eFlex.Common\eFlex.Common.csproj", "{BDB8A044-F6EF-48A7-8594-693AFD80B7B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eFlex.Connectivity", "..\kadis\eFlex.Connectivity\eFlex.Connectivity.csproj", "{6B4085A2-3FF9-4A9C-B33D-9CA11BF26E45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eFlex.Index.Base", "..\kadis\eFlex.Index.Base\eFlex.Index.Base.csproj", "{AB76898C-6249-4EB2-B978-B8177805D9E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eFlex.Index.Demo", "..\kadis\eFlex.Index.Demo\eFlex.Index.Demo.csproj", "{38F390B9-B82E-4481-ACBD-3A2654F2452A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlToModel", "..\kadis\SqlToModel\SqlToModel.csproj", "{9E73D52E-7805-403B-96CD-1802C9B67219}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F91DB6CF-8D00-400D-A9A8-FBF2686DC286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91DB6CF-8D00-400D-A9A8-FBF2686DC286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91DB6CF-8D00-400D-A9A8-FBF2686DC286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91DB6CF-8D00-400D-A9A8-FBF2686DC286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB8A044-F6EF-48A7-8594-693AFD80B7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB8A044-F6EF-48A7-8594-693AFD80B7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB8A044-F6EF-48A7-8594-693AFD80B7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB8A044-F6EF-48A7-8594-693AFD80B7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B4085A2-3FF9-4A9C-B33D-9CA11BF26E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B4085A2-3FF9-4A9C-B33D-9CA11BF26E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4085A2-3FF9-4A9C-B33D-9CA11BF26E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B4085A2-3FF9-4A9C-B33D-9CA11BF26E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB76898C-6249-4EB2-B978-B8177805D9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB76898C-6249-4EB2-B978-B8177805D9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB76898C-6249-4EB2-B978-B8177805D9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB76898C-6249-4EB2-B978-B8177805D9E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F390B9-B82E-4481-ACBD-3A2654F2452A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F390B9-B82E-4481-ACBD-3A2654F2452A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F390B9-B82E-4481-ACBD-3A2654F2452A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F390B9-B82E-4481-ACBD-3A2654F2452A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E73D52E-7805-403B-96CD-1802C9B67219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E73D52E-7805-403B-96CD-1802C9B67219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E73D52E-7805-403B-96CD-1802C9B67219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E73D52E-7805-403B-96CD-1802C9B67219}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D63738B7-4198-49C4-93EF-A304E09284C4}
+	EndGlobalSection
+EndGlobal
